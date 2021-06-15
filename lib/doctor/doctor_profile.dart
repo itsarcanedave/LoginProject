@@ -18,16 +18,22 @@ Future<void>getUserData() async{
         print(userData.email);
       });
 }
-
-// void _getUserData() {
-//     documentReference.get().then((datasnapshot) {
-//       if (datasnapshot.exists) {
-//         setState(() {
-//           nama = datasnapshot.data()['name'];
-//           phone = datasnapshot.data()['phone'];
-//           // points = datasnapshot.data()['points'];
-//         });
-//       }
+  // Added global variable declaration required for _getUserData
+  String nama;
+  String phone;
+  final DocumentReference documentReference =
+      FirebaseFirestore.instance.doc("Ada dimana");
+  
+// Enabled previously disabled function
+void _getUserData() {
+     documentReference.get().then((datasnapshot) {
+       if (datasnapshot.exists) {
+         setState(() {
+           nama = datasnapshot.data()['name'];
+           phone = datasnapshot.data()['phone'];
+           // points = datasnapshot.data()['points'];
+         });
+       }
 
 
   @override
