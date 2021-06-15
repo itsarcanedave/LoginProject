@@ -10,11 +10,13 @@ class DocProfile extends StatefulWidget {
 
 class _DocProfileState extends State<DocProfile> {
 // -------------------CURRENT USER---------------------
-FirebaseUser user; 
+FirebaseUser user;
+String uid; //Added uid variable
 Future<void>getUserData() async{
   FirebaseUser userData = await FirebaseAuth.instance.currentUser();
   setState(() {
         user = userData;
+        uid = user.uid
         print(userData.email);
       });
 }
@@ -22,7 +24,7 @@ Future<void>getUserData() async{
   String nama;
   String phone;
   final DocumentReference documentReference =
-      FirebaseFirestore.instance.doc("Ada dimana");
+      FirebaseFirestore.instance.doc("profileInfo" + "/" + uid); //Fixed
   
 // Enabled previously disabled function
 void _getUserData() {
